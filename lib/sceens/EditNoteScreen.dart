@@ -32,7 +32,9 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: pink,
+      ),
       body: ListView(
         children: [
           Input(

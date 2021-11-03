@@ -26,6 +26,7 @@ class Note extends HiveObject{
     notes.add(this);
     NoteBox().putNotes(notes);
     Get.off(() => ViewNoteScreen(note: this));
+    Get.snackbar("Add", "Success", snackPosition: SnackPosition.BOTTOM);
   }
 
   delete() async {
@@ -33,18 +34,18 @@ class Note extends HiveObject{
     List notes = noteController.notes;
     notes.remove(this);
     NoteBox().putNotes(notes);
+    Get.snackbar("Delete", "Success", snackPosition: SnackPosition.BOTTOM);
   }
 
   edit(String title, String description){
+    this.title = title;
+    this.description = description;
     final NoteController noteController = Get.put(NoteController());
     List notes = noteController.notes;
-    notes[this.id] = Note(id: this.id, title: title, description: description);
+    notes[this.id] = this;
     NoteBox().putNotes(notes);
-    Get.off(() => ViewNoteScreen(note: Note(
-      id: this.id,
-      title: title,
-      description: description
-    )));
+    Get.off(() => ViewNoteScreen(note: this));
+    Get.snackbar("Edit", "Success", snackPosition: SnackPosition.BOTTOM);
   }
 
 }
